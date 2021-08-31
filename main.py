@@ -1,24 +1,25 @@
 #A simple but hopefully efficient terminal
 #Python Blackjack.
 import random
-### Decide about the Image-Cards ### 
 
 deck = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']
-
-
-
-### Create the list of cards and manage previous task ###
 
 ### deal the computer 2 cards and check if it is a black jack and display how many points the showing card is worth###
 
 def check_winner(player_points, computer_points):
+    global game_is_on
     print(f'The computer cards were {computer_cards} ({computer_points} points)')
     if player_points > computer_points:
-        return f"player wins!! you made {player_points} and the computer only {computer_points}"
+        print(f"player wins!! you made {player_points} and the computer only {computer_points}")
+        game_is_on = False
+        
     elif computer_points > player_points:
-        return f"computer wins!! you made {player_points} and the computer made {computer_points}"
+        print(f"computer wins!! you made {player_points} and the computer made {computer_points}")
+        game_is_on = False
+
     elif computer_points == player_points:
-        return f'its a tie with {player_points}'
+        print(f'its a tie with {player_points}')
+        game_is_on = False
     
 def get_computer_cards():
     computer_cards = []
@@ -50,8 +51,6 @@ def calculate_player_points():
             player_points += i
     return player_points
 
-### hide one of the computer cards
-
 game_is_on = True
 
 while game_is_on:
@@ -68,7 +67,7 @@ while game_is_on:
 
     user_first_answer = input('do you wanna hit or stand? ')
     
-    if user_first_answer == 'hit' or 'h':
+    if user_first_answer == 'hit':
         player_cards.append(deck[random.randint(0, 12)])
         player_points = calculate_player_points()
         print(f'{player_cards} ({player_points})')
@@ -82,40 +81,40 @@ while game_is_on:
             game_is_on = False
         else:
             second_answer = input(f'now you have {player_points}. Do you wanna hit or stand? ')
-            if second_answer == 'hit' or 'h':
+            if second_answer == 'hit':
                 player_cards.append(deck[random.randint(0, 12)])
                 player_points = calculate_player_points()
                 print(f'{player_cards} ({player_points})')
                 if player_points == 21:
                     print('you win')
-                    print(f'computer cards were {computer_cards}')
+                    print(f'computer cards were {computer_cards} ({computer_points})')
                     game_is_on = False
                 elif player_points > 21:
                     print(f'game over.')
-                    print(f'computer cards were {computer_cards}')
+                    print(f'computer cards were {computer_cards} ({computer_points})')
                     game_is_on = False
                 else:
                     third_answer = input(f'Damn. What are the odds. You have {player_points}. Do you wanna hit or stand?')
-                    if third_answer == 'hit' or 'h':
+                    if third_answer == 'hit':
                         player_cards.append(deck[random.randint(0, 12)])
                         player_points = calculate_player_points()
                         print(f'{player_cards} ({player_points})')
                         if player_points == 21:
                             print('you win')
-                            print(f'computer cards were {computer_cards}')
+                            print(f'computer cards were {computer_cards} ({computer_points})')
                             game_is_on = False
                         elif player_points > 21:
                             print(f'game over.')
-                            print(f'computer cards were {computer_cards}')
+                            print(f'computer cards were {computer_cards} ({computer_points})')
                             game_is_on = False
-                    elif third_answer == 'stand' or 's':
+                    elif third_answer == 'stand':
                         check_winner(player_points,computer_points)
-            elif second_answer == 'stand' or 's':
+            elif second_answer == 'stand':
                         check_winner(player_points,computer_points)            
-    elif user_first_answer == 'stand' or 's':
+    elif user_first_answer == 'stand':
         check_winner(player_points,computer_points)  
 
-#print(f'The computer cards are {computer_cards} it has made {computer_points} points')
+#print(f'The computer cards are {compustandter_cards} it has made {computer_points} points')
 ### deal the computer 2 cards, check if it is a black jack and display how many points youve made ###
 ### show player cards
 
